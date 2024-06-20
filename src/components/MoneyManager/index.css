@@ -1,0 +1,33 @@
+/* Write your CSS here */
+
+.bg-container {
+  height: 100vh;
+  padding: 30px;
+}
+.name-con {
+  padding: 20px;
+  background-image: url(https://assets.ccbp.in/frontend/react-js/money-manager/money-manager-bg.png);
+  height: 150px;
+  width: 100%;
+  background-size: cover;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.name {
+  font-family: 'Roboto';
+  font-size: 30px;
+  color: #475569;
+}
+
+.welcome {
+  font-family: 'Roboto';
+  font-size: 17px;
+  color: #475569;
+}
+
+.money-manager {
+  color: #0b69ff;
+  font-weight: 500;
+}

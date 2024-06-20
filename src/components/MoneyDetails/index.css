@@ -1,0 +1,51 @@
+/* Write your CSS here */
+.money-details-con {
+  display: flex;
+  justify-content: space-evenly;
+}
+.con {
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+  width: 25%;
+  height: 120px;
+
+  border-radius: 10px;
+}
+.con-1 {
+  background-color: #ecfccb;
+  border: 1px solid #84cc16;
+}
+.con-2 {
+  background-color: #cffafe;
+  border: 1px solid #06b6d4;
+}
+
+.con-2 {
+  background-color: #ede9fe;
+  border: 1px solid #7c3aed;
+}
+.money-imgs {
+  width: 80px;
+  height: 80px;
+  margin-right: 20px;
+}
+
+.money-details-name-con {
+}
+.money-dtls-name {
+  font-family: 'Roboto';
+  color: #7e858e;
+  margin-top: 0px;
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.money-dtls-amt {
+  font-family: 'Roboto';
+  color: #334155;
+  font-size: 28px;
+  margin-bottom: 0;
+  margin-top: 5px;
+}
