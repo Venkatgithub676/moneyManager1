@@ -17,12 +17,15 @@ const transactionTypeOptions = [
 
 // Write your code here
 
-class MoneyMangager extends Component {
+class MoneyManager extends Component {
   state = {
     listItems: [],
     title: '',
     amt: '',
-    type: 'Income',
+    type: 'INCOME',
+    bal: 0,
+    income: 0,
+    expenses: 0,
   }
 
   onChangeTitle = event => {
@@ -39,7 +42,15 @@ class MoneyMangager extends Component {
 
   submitForm = event => {
     event.preventDefault()
+    let {bal, expenses, income} = this.state
     const {title, amt, type} = this.state
+    if (type === 'INCOME') {
+      bal += parseInt(amt)
+      income += parseInt(amt)
+    } else {
+      expenses += parseInt(amt)
+      bal -= parseInt(amt)
+    }
     const newObj = {
       id: uuidv4(),
       title,
@@ -47,14 +58,40 @@ class MoneyMangager extends Component {
       type,
       clickedDelBtn: false,
     }
-    this.setState(prevState => ({listItems: [...prevState.listItems, newObj]}))
+    this.setState(prevState => ({
+      listItems: [...prevState.listItems, newObj],
+      title: '',
+      amt: '',
+      type: 'INCOME',
+      income,
+      bal,
+      expenses,
+    }))
   }
 
-  formContainer = () => (
+  delBtn = (id, amt, type) => {
+    let {bal, income, expenses} = this.state
+
+    if (type === 'INCOME') {
+      bal -= parseInt(amt)
+      income -= parseInt(amt)
+    } else {
+      bal += parseInt(amt)
+      expenses -= parseInt(amt)
+    }
+    this.setState(prevState => ({
+      listItems: [...prevState.listItems.filter(each => each.id !== id)],
+      income,
+      bal,
+      expenses,
+    }))
+  }
+
+  formContainer = (title, amt, type) => (
     <form className="add-transaction-con" onSubmit={this.submitForm}>
       <h1 className="add-transaction-heading">Add Transaction</h1>
       <label htmlFor="title" className="label">
-        Title
+        TITLE
       </label>
       <br />
       <input
@@ -62,10 +99,12 @@ class MoneyMangager extends Component {
         onChange={this.onChangeTitle}
         id="title"
         className="transaction-input"
+        value={title}
+        placeholder="TITLE"
       />
       <br />
       <label className="label" htmlFor="amount">
-        Amount
+        AMOUNT
       </label>
       <br />
       <input
@@ -73,15 +112,22 @@ class MoneyMangager extends Component {
         id="amount"
         onChange={this.onChangeAmt}
         className="transaction-input"
+        value={amt}
+        placeholder="AMOUNT"
       />
       <br />
       <label className="label" htmlFor="select">
-        Type
+        TYPE
       </label>
       <br />
-      <select id="select" className="select-el" onChange={this.onChangeSelect}>
+      <select
+        id="select"
+        value={type}
+        className="select-el"
+        onChange={this.onChangeSelect}
+      >
         {transactionTypeOptions.map(each => (
-          <option value={each.displayText}>{each.displayText}</option>
+          <option value={each.optionId}>{each.displayText}</option>
         ))}
       </select>
       <br />
@@ -91,26 +137,24 @@ class MoneyMangager extends Component {
     </form>
   )
 
-  historyContainer = () => {
-    const {listItems} = this.state
-    return (
-      <div className="history-heading-con">
-        <h1 className="history-heading">History</h1>
-        <div className="history-con">
-          <h1 className="headings">Title</h1>
-          <h1 className="headings">Amount</h1>
-          <h1 className="headings">Type</h1>
-        </div>
-        <ul className="ul-con">
-          {listItems.map(each => (
-            <TransactionItem each={each} />
-          ))}
-        </ul>
+  historyContainer = listItems => (
+    <div className="history-heading-con">
+      <h1 className="history-heading">History</h1>
+      <div className="history-con">
+        <p className="headings">Title</p>
+        <p className="headings">Amount</p>
+        <p className="headings">Type</p>
       </div>
-    )
-  }
+      <ul className="ul-con">
+        {listItems.map(each => (
+          <TransactionItem each={each} delBtn={this.delBtn} key={each.id} />
+        ))}
+      </ul>
+    </div>
+  )
 
   render() {
+    const {title, amt, type, bal, income, expenses, listItems} = this.state
     return (
       <div className="bg-container">
         <div className="main-container">
@@ -118,13 +162,13 @@ class MoneyMangager extends Component {
             <h1 className="name">Hi, Richard</h1>
             <p className="welcome">
               Welcome back to your
-              <span className="money-manager">Money Manager</span>
+              <span className="money-manager"> Money Manager</span>
             </p>
           </div>
-          <MoneyDetails />
+          <MoneyDetails bal={bal} income={income} expenses={expenses} />
           <div className="form-history-con">
-            {this.formContainer()}
-            {this.historyContainer()}
+            {this.formContainer(title, amt, type)}
+            {this.historyContainer(listItems)}
           </div>
         </div>
       </div>
@@ -132,4 +176,4 @@ class MoneyMangager extends Component {
   }
 }
 
-export default MoneyMangager
+export default MoneyManager
