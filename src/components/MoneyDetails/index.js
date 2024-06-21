@@ -4,7 +4,7 @@ import './index.css'
 
 const MoneyDetails = () => (
   <div className="money-details-con">
-    <div className="con-1">
+    <div className="con con-1">
       <img
         src="https://assets.ccbp.in/frontend/react-js/money-manager/balance-image.png"
         alt="balance"
@@ -15,10 +15,10 @@ const MoneyDetails = () => (
         <p className="money-dtls-amt">Rs 70000</p>
       </div>
     </div>
-    <div className="con-1">
+    <div className=" con con-2">
       <img
-        src="https://assets.ccbp.in/frontend/react-js/money-manager/balance-image.png"
-        alt="balance"
+        src="https://assets.ccbp.in/frontend/react-js/money-manager/income-image.png"
+        alt="income"
         className="money-imgs"
       />
       <div className="money-details-name-con">
@@ -26,10 +26,10 @@ const MoneyDetails = () => (
         <p className="money-dtls-amt">Rs 70000</p>
       </div>
     </div>
-    <div className="con-1">
+    <div className="con con-3">
       <img
-        src="https://assets.ccbp.in/frontend/react-js/money-manager/balance-image.png"
-        alt="balance"
+        src="https://assets.ccbp.in/frontend/react-js/money-manager/expenses-image.png"
+        alt="expenses"
         className="money-imgs"
       />
       <div className="money-details-name-con">
