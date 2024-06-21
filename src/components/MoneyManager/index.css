@@ -36,7 +36,10 @@
   color: #0b69ff;
   font-weight: 500;
 }
-
+.form-history-con {
+  display: flex;
+  justify-content: space-between;
+}
 .add-transaction-con {
   width: 40%;
   padding: 20px 30px 20px 30px;
